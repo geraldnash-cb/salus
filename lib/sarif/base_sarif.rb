@@ -138,6 +138,10 @@ module Sarif
 
         next if @required == false && @config['include_suppressed'] == false
 
+        next if @required == false && @config.key?('include_active') == false
+
+        next if @required == false && @config['include_active'] == false
+
         rule = build_rule(parsed_issue)
         rules << rule if rule
         result = build_result(parsed_issue)
