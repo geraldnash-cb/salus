@@ -80,7 +80,7 @@ module Salus::Scanners
         enforce_explicit_ignoring
 
         # run semgrep
-        shell_return = run_shell(command)
+        shell_return = run_shell(command, chdir: base_path)
 
         # check to make sure it's successful
         if shell_return.success?
@@ -234,7 +234,7 @@ module Salus::Scanners
           "--config",
           config_val,
           *exclude_flags,
-          base_path
+          "."
         ].compact
         user_message = "patterns in config \"#{config}\""
       else
@@ -249,7 +249,7 @@ module Salus::Scanners
           "--lang",
           match['language'],
           *exclude_flags,
-          base_path
+          "."
         ].compact
         user_message = "pattern \"#{pattern}\""
       end

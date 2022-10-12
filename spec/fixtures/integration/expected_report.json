@@ -1,60 +1,22 @@
 {
-  "version": "2.22.0",
-  "passed": true,
-  "running_time": 0.0,
-  "scans": {
-    "PatternSearch": {
-      "scanner_name": "PatternSearch",
-      "version": "0.9.0",
-      "passed": true,
-      "running_time": 0.0,
-      "warn": {
-      },
-      "info": {
-        "hits": [
-          {
-            "regex": "placeholder",
-            "forbidden": false,
-            "required": false,
-            "msg": "",
-            "hit": "README.md:1:# placeholder"
-          }
-        ],
-        "misses": [
-        ]
-      },
-      "errors": [
-
-      ]
-    }
-  },
-  "errors": [
-
-  ],
   "config": {
     "active_scanners": [
-      "PatternSearch"
+      "PatternSearch",
+      "Semgrep"
     ],
+    "builds": {
+    },
     "enforced_scanners": [
-      "PatternSearch"
+      "PatternSearch",
+      "Semgrep"
+    ],
+    "report_uris": [
+      {
+        "format": "json",
+        "uri": "file:///home/repo/reports/salus_report.json"
+      }
     ],
     "scanner_configs": {
-      "PatternSearch": {
-        "pass_on_raise": false,
-        "scanner_timeout_s": 0,
-        "exclude_extension": [
-          "json",
-          "yaml"
-        ],
-        "matches": [
-          {
-            "regex": "placeholder",
-            "forbidden": false,
-            "required": false,
-            "message": ""
-          }
-        ]
-      },
       "Bandit": {
         "pass_on_raise": false,
         "scanner_timeout_s": 0
@@ -91,7 +53,7 @@
         "pass_on_raise": false,
         "scanner_timeout_s": 0
       },
-      "MavenOSV" :{
+      "MavenOSV": {
         "pass_on_raise": false,
         "scanner_timeout_s": 0
       },
@@ -103,6 +65,26 @@
         "pass_on_raise": false,
         "scanner_timeout_s": 0
       },
+      "NodeAudit": {
+        "pass_on_raise": false,
+        "scanner_timeout_s": 0
+      },
+      "PatternSearch": {
+        "exclude_extension": [
+          "json",
+          "yaml"
+        ],
+        "matches": [
+          {
+            "forbidden": false,
+            "message": "",
+            "regex": "placeholder",
+            "required": false
+          }
+        ],
+        "pass_on_raise": false,
+        "scanner_timeout_s": 0
+      },
       "PythonOSV": {
         "pass_on_raise": false,
         "scanner_timeout_s": 0
@@ -111,11 +93,11 @@
         "pass_on_raise": false,
         "scanner_timeout_s": 0
       },
-      "ReportGradleDeps": {
+      "ReportGoDep": {
         "pass_on_raise": false,
         "scanner_timeout_s": 0
       },
-      "ReportGoDep": {
+      "ReportGradleDeps": {
         "pass_on_raise": false,
         "scanner_timeout_s": 0
       },
@@ -156,25 +138,29 @@
         "scanner_timeout_s": 0
       },
       "Semgrep": {
+        "matches": [
+          {
+            "forbidden": false,
+            "language": "python",
+            "message": "",
+            "pattern": "$X == $X",
+            "required": false,
+            "strict": false
+          }
+        ],
         "pass_on_raise": false,
-        "scanner_timeout_s": 0
+        "recursion": {
+          "directories": [
+            "semgrep/nested_a/nested_ab/nested_aba"
+          ]
+        },
+        "scanner_timeout_s": 0,
+        "strict": true
       },
       "YarnAudit": {
         "pass_on_raise": false,
         "scanner_timeout_s": 0
-      },
-      "NodeAudit": {
-        "pass_on_raise": false,
-        "scanner_timeout_s": 0
       }
-    },
-    "report_uris": [
-      {
-        "uri": "file://./repo/reports/salus_report.json",
-        "format": "json"
-      }
-    ],
-    "builds": {
     },
     "sources": {
       "configured": [
@@ -184,5 +170,66 @@
         "file:///salus.yaml"
       ]
     }
-  }
+  },
+  "errors": [
+
+  ],
+  "passed": true,
+  "running_time": 1.36,
+  "scans": {
+    "PatternSearch": {
+      "errors": [
+
+      ],
+      "info": {
+        "hits": [
+          {
+            "forbidden": false,
+            "hit": "README.md:1:# placeholder",
+            "msg": "",
+            "regex": "placeholder",
+            "required": false
+          }
+        ],
+        "misses": [
+
+        ]
+      },
+      "passed": true,
+      "running_time": 0.02,
+      "scanner_name": "PatternSearch",
+      "version": "0.9.0",
+      "warn": {
+      }
+    },
+    "Semgrep": {
+      "errors": [
+
+      ],
+      "info": {
+        "hits": [
+          {
+            "config": null,
+            "forbidden": false,
+            "hit": "test_aba.py:10:    if user.id == user.id:",
+            "id": "11d6bdec931137a1063338f1f80a631f5b1f2fc2",
+            "msg": "",
+            "pattern": "$X == $X",
+            "required": false,
+            "severity": "ERROR"
+          }
+        ],
+        "misses": [
+
+        ]
+      },
+      "passed": true,
+      "running_time": 0.44,
+      "scanner_name": "Semgrep",
+      "version": "0.112.1",
+      "warn": {
+      }
+    }
+  },
+  "version": "2.22.0"
 }

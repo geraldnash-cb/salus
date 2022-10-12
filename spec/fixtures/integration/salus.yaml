@@ -5,11 +5,22 @@ reports:
 
 active_scanners:
   - PatternSearch
+  - Semgrep
 
 enforced_scanners:
   - PatternSearch
+  - Semgrep
 
 scanner_configs:
+  Semgrep:
+    strict: true
+    matches:
+      - pattern: "$X == $X"
+        language:  python
+        forbidden: false
+    recursion:
+      directories:
+        - semgrep/nested_a/nested_ab/nested_aba
   PatternSearch:
     exclude_extension:
       - json
